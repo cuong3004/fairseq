@@ -40,6 +40,8 @@ from .transformer_sentence_encoder import TransformerSentenceEncoder
 from .transpose_last import TransposeLast
 from .unfold import unfold1d
 from .transformer_layer import TransformerDecoderLayer, TransformerEncoderLayer
+from .single_head_attention import SingleHeadAttention
+from .delight_transformer_layer import DeLighTTransformerDecoderLayer, DeLighTTransformerEncoderLayer
 from .vggblock import VGGBlock
 from .espnet_multihead_attention import (
     ESPNETMultiHeadedAttention,
@@ -101,4 +103,7 @@ __all__ = [
     "RelPositionalEncoding",
     "RotaryPositionalEmbedding",
     "RotaryPositionMultiHeadedAttention",
+    "SingleHeadAttention",
+    "DeLighTTransformerDecoderLayer",
+    "DeLighTTransformerEncoderLayer",
 ]
