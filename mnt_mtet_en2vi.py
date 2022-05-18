@@ -32,7 +32,7 @@ def run_experiment(args):
         os.makedirs(results_dir)
     log_file = '{}/logs.txt'.format(results_dir)
 
-    command = ['python train.py {} --arch delight_transformer_wmt14_en_fr '
+    command = ['python train.py {} --arch delight_transformer '
                '--log-interval 100 --no-progress-bar '
                '--optimizer adam --adam-betas \'(0.9, 0.98)\' --clip-norm 0.0 --weight-decay 0.0 '
                '--criterion label_smoothed_cross_entropy --label-smoothing 0.1 '
@@ -40,17 +40,19 @@ def run_experiment(args):
                '--max-tokens {} '
                '--max-update {} --warmup-updates {} --lr-period-updates {} '
                '--lr-scheduler cosine --warmup-init-lr 1e-7 '
-               '--lr-shrink 1 --max-lr {} --lr 1e-7 --min-lr 1e-9 '
+               '--lr-shrink 1 --lr 1e-7 --min-lr 1e-9 '
                '--t-mult 1 --save-dir {} '
+               '--skip-invalid-size-inputs-valid-test '
+               '--wandb-project delight '
                '--delight-emb-map-dim 128 --delight-emb-out-dim {} '
                '--delight-enc-min-depth 4 --delight-enc-max-depth 8 --delight-enc-width-mult 2 '
                '--delight-dec-min-depth 4 --delight-dec-max-depth 8 --delight-dec-width-mult 2 '
-               '| tee -a {}'.format(data_dir,
+               ''.format(data_dir,
                                     update_freq, max_tokens,
-                                    max_update, warmup_update, lr_period_updates, max_lr,
+                                    max_update, warmup_update, lr_period_updates,
                                     results_dir,
                                     d_m,
-                                    log_file
+                                    
                                     )]
 
     print_log_message('Training command: ')
